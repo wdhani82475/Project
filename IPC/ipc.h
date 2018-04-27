@@ -30,6 +30,16 @@ union semun
 	ushort *array;
 };
 /////////////////////////////////
+int Shmget(key_t key,size_t size,int oflag )
+{
+	int shm_id = shmget(key,size,oflag);
+	if(shm_id == -1)
+	{
+		perror("shm_id");
+	}
+	return shm_id;
+}
+
 
 #endif
 
