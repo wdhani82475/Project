@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<sys/ipc.h>
+#include<sys/shm.h>
 //////////////////////
 key_t Ftok(char *pathname,int id)
 {
@@ -39,7 +40,27 @@ int Shmget(key_t key,size_t size,int oflag )
 	}
 	return shm_id;
 }
-
+void *Shmat(int shmid,const void *shmaddr,int shmflg )
+{
+	
+	void *addr =(void *)shmat(shmid,shmaddr,shmflg);
+	if((void*)addr == (void*)-1)
+	{
+		perror("shmat");
+		shmctl(shmid,IPC_RMID,NULL);
+		exit(1);
+	}
+	return addr;
+}
+int Shmdt(const void *shmaddr)
+{
+	int ret = shmdt(shmaddr);
+	if(ret == -1)
+	{
+		perror("shmdt");
+	}
+	return ret;
+}
 
 #endif
 

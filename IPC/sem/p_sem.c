@@ -12,6 +12,7 @@ int main(int argc,char *argv[])
 	ptr.sem_num = 0;
 	ptr.sem_op = -1;
 	ptr.sem_flg = 0;
+	//struct sembuf ptr = {0,-1,0};
 	int res = semop(sem_id,&ptr,1);
 	if(res == -1)
 		perror("semop");
