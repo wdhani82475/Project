@@ -2,8 +2,10 @@
 #define __IPC_H__
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include<sys/ipc.h>
 #include<sys/shm.h>
+#include<sys/msg.h>
 //////////////////////
 key_t Ftok(char *pathname,int id)
 {
@@ -61,6 +63,15 @@ int Shmdt(const void *shmaddr)
 	}
 	return ret;
 }
-
+///////////////////////////////////////////////
+int Msgget(key_t key,int oflag)
+{
+	int res = msgget(key,oflag);
+	if(res == -1)
+	{
+		perror("msgget");
+	}
+	return res;
+}
 #endif
 
