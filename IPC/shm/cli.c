@@ -7,16 +7,12 @@ int main(int argc,char* argv[])
 		printf("Usage:shm < %s pathname proj_id>",argv[0]);
 		exit(1);
 	}
-	key_t  shm_key = Ftok(argv[1],atoi(argv[2]));
+	key_t shm_key = Ftok(argv[1],atoi(argv[2]));
+	printf("shm_key =%x\n",shm_key);
 	int shm_id = Shmget(shm_key,0,0);
-	char *addr = Shmat(shm_id,NULL,0);
+	char *addr =(char *) Shmat(shm_id,NULL,0);
 	///////////////////////////////////
-	int sem_id = Semget(shm_id,0,0);
-	union  semun info;
-	info.val = 0;
-	semctl(sem_id,0,SETVAL,&info);
-	semctl(sem_id,1,SETVAL,&info);
-
+	int sem_id = Semget(shm_key,0,0);
 	struct sembuf p={0,-1,0};
 	struct sembuf v={1,1,0};
 	///////////////////////////////////
@@ -24,10 +20,12 @@ int main(int argc,char* argv[])
 	{
 		semop(sem_id,&p,1);
 		printf("Ser> %s\n",addr);
-
-		semop(sem_id,&v,1);
+		
 		printf("Cli>");
 		scanf("%s",addr);
+		semop(sem_id,&v,1);
 	}
+	shmdt(addr);
+
 	return 0;
 }

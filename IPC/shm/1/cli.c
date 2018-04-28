@@ -1,4 +1,4 @@
-#include"../ipc.h"
+#include"../../ipc.h"
 int main(int argc,char* argv[])
 {
 	if(argc != 3)
