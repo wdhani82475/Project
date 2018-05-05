@@ -17,11 +17,9 @@ typedef struct
 #define RW_MAGIC 0x12345678
 #define PTHREAD_RWLOCK_INITIALIZER {PTHREAD_MUTEX_INITIALIZER,\
 PTHREAD_COND_INITIALIZER,\
-PTHREAD_COND_INITIALLIZER,\
+PTHREAD_COND_INITIALIZER,\
 RW_MAGIC, 0,0,0}
 int my_pthread_rwlock_rdlock(my_pthread_rwlock_t *rw);
 int my_pthread_rwlock_wrlock(my_pthread_rwlock_t *rd);
 int my_pthread_rwlock_unlock(my_pthread_rwlock_t *lc);
-
-
 #endif

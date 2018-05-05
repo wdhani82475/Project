@@ -4,8 +4,8 @@
 #include<stdlib.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
-#define SER_PORT 8080
-#define SER_IP "192.168.56.1"
+#define SER_PORT 9090
+#define SER_IP "10.0.2.15"
 #define LISTEN_NUM 12 //定义连接请求队列长度
 #define BUFFER 256
 

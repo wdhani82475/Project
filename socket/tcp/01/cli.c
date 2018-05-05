@@ -1,4 +1,4 @@
-#include"utili.h"
+#include"../utili.h"
 
 int main()
 {
@@ -16,6 +16,10 @@ int main()
 	{
 		printf("Cli>");
 		scanf("%s",send_buffer);
+		if(!strcmp(send_buffer,"quit"))
+		{
+			break;
+		}
 		send(sockCli,send_buffer,strlen(send_buffer)+1,0);
 		recv(sockCli,recv_buffer,BUFFER,0);
 		printf("Ser>%s\n",recv_buffer);

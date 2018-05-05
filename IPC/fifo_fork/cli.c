@@ -1,6 +1,8 @@
 #include"utili.h"
 int main()
 {
+
+	int read_fd = open(write_fifo,O_RDONLY);
 	if(read_fd == -1)
 	{
 		perror("read_fd");

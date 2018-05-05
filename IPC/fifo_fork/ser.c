@@ -27,16 +27,16 @@ int main()
 	pid_t pid = fork();
 	if(pid == 0)
 	{
-		//write
-		write_msg(write_fd);
+		//read
+		read_msg(read_fd);
 	}
 	else if(pid > 0)
 	{
 		pid = fork();
 		if(pid == 0)
 		{	
-			//read
-			read_msg(read_fd);
+			//write
+			write_msg(write_fd);
 		}
 		else if(pid >0)
 		{	

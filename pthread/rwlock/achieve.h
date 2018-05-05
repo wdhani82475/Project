@@ -78,4 +78,3 @@ my_pthread_rwlock_unlock(my_pthread_rwlock_t *rw)
 	return result;
 }
 
-
