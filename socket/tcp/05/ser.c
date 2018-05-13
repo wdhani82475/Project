@@ -11,13 +11,13 @@ void * handle(void *arg)
 	int fd = *(int *)arg;
 	while(1)	
 	{
+		recv(fd,recv_buffer,BUFFER,0);
+		printf("Cli>%s\n",recv_buffer);
 		printf("Ser>");
 		scanf("%s",send_buffer);	
 		if(!strcmp(send_buffer,"quit"))
 		exit(0);
 		send(fd,send_buffer,strlen(send_buffer)+1,0);
-		recv(fd,recv_buffer,BUFFER,0);
-		printf("Cli>%s\n",recv_buffer);
 	}
 }
 int main()
@@ -36,13 +36,14 @@ int main()
 	int res = Listen(sockSer,LISTEN_NUM);
 	//printf("res = %d\n",res);
 	socklen_t cli_len = sizeof(struct sockaddr_in);
+	pthread_t tid1;
 	while(1)
 	{
 		int connfd =Accept(sockSer,(struct sockaddr*)&cli_addr,&cli_len);
-		pthread_t tid1,tid2;
 		pthread_create(&tid1,NULL,(void*)handle,&connfd);
-		pthread_join(tid1,NULL);
 	}
+		pthread_join(tid1,NULL);
+
 		close(sockSer);
 	return 0;
 }
